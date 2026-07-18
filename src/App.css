@@ -1,0 +1,14 @@
+.landing-page {
+  background-image: url('https://images.unsplash.com/photo-1463936575829-25148e1db1b8');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+.product-grid { padding: 20px; }
+.plant-card { border: 1px solid #ccc; padding: 15px; margin: 10px; border-radius: 8px; }

@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { removeItem, updateQuantity } from './CartSlice';
 
 function CartItem({ onContinue }) {
-  // Access items slice from Redux global store
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
 
@@ -12,9 +11,18 @@ function CartItem({ onContinue }) {
     return cart.reduce((total, item) => total + (item.cost * item.quantity), 0);
   };
 
-  // Triggers alert feedback array for pending payment infrastructure integration
+  // Triggers alert feedback for checkout operations
   const handleCheckoutShopping = () => {
     alert('Checkout functionality coming soon!');
+  };
+
+  // Explicit handling for decreasing items to ensure removal at zero quantity
+  const handleDecrement = (item) => {
+    if (item.quantity - 1 <= 0) {
+      dispatch(removeItem(item.name));
+    } else {
+      dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }));
+    }
   };
 
   return (
@@ -32,7 +40,7 @@ function CartItem({ onContinue }) {
                 <p>Unit Price: ${item.cost} | Subtotal: ${item.cost * item.quantity}</p>
               </div>
               <div>
-                <button onClick={() => dispatch(updateQuantity({ name: item.name, quantity: item.quantity - 1 }))} style={{ padding: '2px 8px' }}>-</button>
+                <button onClick={() => handleDecrement(item)} style={{ padding: '2px 8px' }}>-</button>
                 <span style={{ margin: '0 10px', fontWeight: 'bold' }}>{item.quantity}</span>
                 <button onClick={() => dispatch(updateQuantity({ name: item.name, quantity: item.quantity + 1 }))} style={{ padding: '2px 8px' }}>+</button>
                 <button onClick={() => dispatch(removeItem(item.name))} style={{ marginLeft: '20px', backgroundColor: '#d32f2f', color: 'white', border: 'none', padding: '5px 10px', borderRadius: '4px', cursor: 'pointer' }}>Delete</button>

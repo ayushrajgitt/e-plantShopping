@@ -11,9 +11,10 @@ function CartItem({ onContinue }) {
     return cart.reduce((total, item) => total + (item.cost * item.quantity), 0);
   };
 
-  // Triggers alert feedback for checkout operations
+  // Triggers an advanced informative alert for simulated checkout operations
   const handleCheckoutShopping = () => {
-    alert('Checkout functionality coming soon!');
+    const totalCost = calculateTotalAmount();
+    alert(`Thank you for choosing Paradise Nursery!\n\nYour order total is $${totalCost}. This system is currently in demonstration mode. Secure checkout processing and shipping confirmation protocols will be fully deployed in the next production release.`);
   };
 
   // Explicit handling for decreasing items to ensure removal at zero quantity
